@@ -8,7 +8,7 @@
 
 import UIKit
 
-let apiKey = "96fa4468dfc2e94fcb17b3a12093b6f9" //a35c883530bbe53c6db409d2a493991e"
+let apiKey = "96fa4468dfc2e94fcb17b3a12093b6f9"
 let secretKey = "a49c978b3340caec"
 
 class APIService {

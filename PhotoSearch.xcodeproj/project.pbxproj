@@ -67,9 +67,10 @@
 			isa = PBXGroup;
 			children = (
 				22B9038021EF4952001E52E7 /* AppDelegate.swift */,
-				22B9039E21F0D6C3001E52E7 /* Custom Cells */,
-				22B9039B21EF8AF8001E52E7 /* View Controllers */,
-				22B9039221EF5551001E52E7 /* Data */,
+				22B903A422030F30001E52E7 /* Services */,
+				22B9039221EF5551001E52E7 /* Models */,
+				22B9039E21F0D6C3001E52E7 /* Views */,
+				22B9039B21EF8AF8001E52E7 /* Controllers */,
 				22B903A121F0D707001E52E7 /* Interface */,
 				22B9038721EF4955001E52E7 /* Assets.xcassets */,
 				22B9038C21EF4955001E52E7 /* Info.plist */,
@@ -77,32 +78,31 @@
 			path = PhotoSearch;
 			sourceTree = "<group>";
 		};
-		22B9039221EF5551001E52E7 /* Data */ = {
+		22B9039221EF5551001E52E7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				22B9039321EF558F001E52E7 /* PhotoSearchResults.swift */,
 				22B9039521EF55E4001E52E7 /* Photo.swift */,
 				22B9039721EF7F21001E52E7 /* Result.swift */,
-				22B9039921EF7FA5001E52E7 /* APIService.swift */,
 			);
-			path = Data;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		22B9039B21EF8AF8001E52E7 /* View Controllers */ = {
+		22B9039B21EF8AF8001E52E7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				22B9039C21EF8B50001E52E7 /* PhotosCollectionViewController.swift */,
-				22B903A221F0E5EC001E52E7 /* PhotoHeaderView.swift */,
 			);
-			path = "View Controllers";
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		22B9039E21F0D6C3001E52E7 /* Custom Cells */ = {
+		22B9039E21F0D6C3001E52E7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				22B9039F21F0D6EB001E52E7 /* PhotoCollectionViewCell.swift */,
+				22B903A221F0E5EC001E52E7 /* PhotoHeaderView.swift */,
 			);
-			path = "Custom Cells";
+			path = Views;
 			sourceTree = "<group>";
 		};
 		22B903A121F0D707001E52E7 /* Interface */ = {
@@ -112,6 +112,14 @@
 				22B9038921EF4955001E52E7 /* LaunchScreen.storyboard */,
 			);
 			path = Interface;
+			sourceTree = "<group>";
+		};
+		22B903A422030F30001E52E7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				22B9039921EF7FA5001E52E7 /* APIService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
