@@ -18,11 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Photo Search" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="php-e0-qh0">
-                                <rect key="frame" x="20" y="435" width="288" height="212"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Photo Search" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="php-e0-qh0">
+                                <rect key="frame" x="44" y="227.5" width="287" height="212"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="288" id="OPe-dW-00c"/>
-                                    <constraint firstAttribute="height" constant="212" id="qEb-m2-Bqa"/>
+                                    <constraint firstAttribute="height" constant="212" id="760-l5-YLT"/>
+                                    <constraint firstAttribute="width" constant="287" id="vca-Wj-QNb"/>
                                 </constraints>
                                 <color key="textColor" red="0.93450397249999995" green="0.41922885180000002" blue="0.00074044347280000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="75"/>
@@ -31,8 +31,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.58431372549019611" green="0.17254901960784313" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="php-e0-qh0" secondAttribute="bottom" constant="20" id="91v-e8-fEt"/>
-                            <constraint firstItem="php-e0-qh0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="WIz-28-ItL"/>
+                            <constraint firstItem="php-e0-qh0" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="QN1-ft-ZUT"/>
+                            <constraint firstItem="php-e0-qh0" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="RBa-2F-aTV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

@@ -102,6 +102,14 @@ private extension PhotosCollectionViewController {
         return searches[indexPath.section].searchResults[indexPath.row]
     }
     
+    func removePhoto(at indexPath: IndexPath) {
+        searches[indexPath.section].searchResults.remove(at: indexPath.row)
+    }
+    
+    func insertPhoto(_ newPhoto: Photo, at indexPath: IndexPath) {
+        searches[indexPath.section].searchResults.insert(newPhoto, at: indexPath.row)
+    }
+    
     func performLargeImageFetch(for indexPath: IndexPath, photo: Photo) {
         
         // Make sure dequeued a cell of the right type.
@@ -139,7 +147,7 @@ private extension PhotosCollectionViewController {
             shareLabel.text = ""
         }
         
-        shareLabel.textColor = themeColor
+        shareLabel.textColor = .blue
         
         UIView.animate(withDuration: 0.3) {
             self.shareLabel.sizeToFit()
@@ -150,6 +158,14 @@ private extension PhotosCollectionViewController {
 // MARK:- Outlets
 
 extension PhotosCollectionViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Enable Drag Interaction on the CollectionView.
+        collectionView.dragInteractionEnabled = true
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
+    }
     
     @IBAction func share(_ sender: Any) {
         
@@ -184,14 +200,25 @@ extension PhotosCollectionViewController {
             activityItems: images,
             applicationActivities: nil)
         shareController.completionWithItemsHandler = { _, _, _, _ in
-            self.sharing = false
-            self.selectedPhotos.removeAll()
-            self.updateSharedPhotoCountLabel()
+            self.cleanupSharing()
         }
         
         shareController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
         shareController.popoverPresentationController?.permittedArrowDirections = .any
         present(shareController, animated: true, completion: nil)
+    }
+    
+    @IBAction func clearButtonPressed() {
+        cleanupSharing()
+        self.searches.removeAll(keepingCapacity: true)
+        self.collectionView.restore()
+        self.collectionView.reloadData()
+    }
+    
+    func cleanupSharing() {
+        self.sharing = false
+        self.selectedPhotos.removeAll()
+        self.updateSharedPhotoCountLabel()
     }
 }
 
@@ -200,6 +227,7 @@ extension PhotosCollectionViewController {
 extension PhotosCollectionViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         // Add an activity indicator
         let activityIndicator = UIActivityIndicatorView(style: .gray)
         textField.addSubview(activityIndicator)
@@ -236,6 +264,11 @@ extension PhotosCollectionViewController {
     
     // Return the number of searches.
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        searches.count == 0 ?
+            self.collectionView.setEmptyMessage("No photos found. \nPlease start a search.") :
+            self.collectionView.restore()
+        
         return searches.count
     }
     
@@ -326,13 +359,11 @@ extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     // Returns the spacing between the cells, headers and footers.
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
         return sectionInsets
     }
     
     // Spacing between each line in the layout.
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
         return sectionInsets.left
     }
 }
@@ -380,5 +411,62 @@ extension PhotosCollectionViewController {
             selectedPhotos.remove(at: index)
             updateSharedPhotoCountLabel()
         }
+    }
+}
+
+// MARK: - UICollectionViewDragDelegate
+
+extension PhotosCollectionViewController: UICollectionViewDragDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        
+        let newPhoto = photo(for: indexPath)
+        guard let thumbnail = newPhoto.thumbnail else {
+            return []
+        }
+        let item = NSItemProvider(object: thumbnail)
+        let dragItem = UIDragItem(itemProvider: item)
+        return [dragItem]
+    }
+}
+
+// MARK: - UICollectionViewDropDelegate
+
+extension PhotosCollectionViewController: UICollectionViewDropDelegate {    
+    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
+        return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        
+        // Get the destinationIndexPath from the drop coordinator.
+        guard let destinationIndexPath = coordinator.destinationIndexPath else {
+            return
+        }
+        
+        // Loop through the UICollectionViewDropItem and make sure each item has a sourceIndexPath.
+        coordinator.items.forEach { dropItem in
+            guard let sourceIndexPath = dropItem.sourceIndexPath else {
+                return
+            }
+            
+            // Update the collection view.
+            collectionView.performBatchUpdates({
+                let image = photo(for: sourceIndexPath)
+                removePhoto(at: sourceIndexPath)
+                insertPhoto(image, at: destinationIndexPath)
+                collectionView.deleteItems(at: [sourceIndexPath])
+                collectionView.insertItems(at: [destinationIndexPath])
+            }, completion: { _ in
+                // Perform the drop action.
+                coordinator.drop(dropItem.dragItem,
+                                 toItemAt: destinationIndexPath)
+            })
+        }
+    }
+    
+    // Makes sure that the collection view responds to the drop session, making sure that the item is moved correctly.
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession,  withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
     }
 }

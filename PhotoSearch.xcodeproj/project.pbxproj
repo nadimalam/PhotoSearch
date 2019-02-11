@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		227E15E22211B72100A849D5 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E15E12211B72100A849D5 /* UICollectionView+Extension.swift */; };
 		22B9038121EF4952001E52E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9038021EF4952001E52E7 /* AppDelegate.swift */; };
 		22B9038621EF4952001E52E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22B9038421EF4952001E52E7 /* Main.storyboard */; };
 		22B9038821EF4955001E52E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22B9038721EF4955001E52E7 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		227E15E12211B72100A849D5 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		22B9037D21EF4952001E52E7 /* PhotoSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B9038021EF4952001E52E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22B9038521EF4952001E52E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		227E15E02211B6ED00A849D5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				227E15E12211B72100A849D5 /* UICollectionView+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		22B9037421EF4952001E52E7 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +81,7 @@
 				22B9039221EF5551001E52E7 /* Models */,
 				22B9039E21F0D6C3001E52E7 /* Views */,
 				22B9039B21EF8AF8001E52E7 /* Controllers */,
+				227E15E02211B6ED00A849D5 /* Extensions */,
 				22B903A121F0D707001E52E7 /* Interface */,
 				22B9038721EF4955001E52E7 /* Assets.xcassets */,
 				22B9038C21EF4955001E52E7 /* Info.plist */,
@@ -193,6 +204,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				227E15E22211B72100A849D5 /* UICollectionView+Extension.swift in Sources */,
 				22B9039621EF55E4001E52E7 /* Photo.swift in Sources */,
 				22B9039A21EF7FA5001E52E7 /* APIService.swift in Sources */,
 				22B9038121EF4952001E52E7 /* AppDelegate.swift in Sources */,

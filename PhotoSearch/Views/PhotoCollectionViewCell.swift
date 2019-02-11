@@ -14,7 +14,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            imageView.layer.borderWidth = isSelected ? 10 : 0
+            imageView.layer.borderWidth = isSelected ? 6 : 0
         }
     }
     

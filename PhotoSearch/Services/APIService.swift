@@ -12,12 +12,14 @@ let apiKey = "96fa4468dfc2e94fcb17b3a12093b6f9"
 let secretKey = "a49c978b3340caec"
 
 class APIService {
+    
     enum Error: Swift.Error {
         case unknownAPIResponse
         case generic
     }
     
     func searchAPIService(for searchTerm: String, completion: @escaping (Result<PhotoSearchResults>) -> Void) {
+        
         guard let searchURL = searchURL(for: searchTerm) else {
             completion(Result.error(Error.unknownAPIResponse))
             return
@@ -118,6 +120,7 @@ class APIService {
     }
     
     private func searchURL(for searchTerm:String) -> URL? {
+        
         guard let escapedTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) else {
             return nil
         }
